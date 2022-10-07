@@ -1,6 +1,5 @@
 import { Text, View, FlatList, StatusBar, TouchableOpacity } from 'react-native';
 import { Produto } from '../../componentes/Produto';
-import { produtos } from './produtos';
 import { estilos } from './estilos';
 import { Feather } from 'react-native-vector-icons'
 import MaterialCommunityIcons from 'react-native-vector-icons/Feather';
@@ -40,10 +39,15 @@ export default function Resumo({navigation}) {
       <FlatList
         data={carrinho}
         keyExtractor={item => Math.random()}
-        renderItem={({ item }) => <Produto item={item} adicionar={true} />}
+        renderItem={({ item }) => <Produto item={item} adicionar={false} />}
         style={estilo.lista}
         showsVerticalScrollIndicator={false}
       />
+
+      <TouchableOpacity style={estilo.botao}>
+        <Text strle={estilo.botaoTexto}>Finalizar Compra</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
