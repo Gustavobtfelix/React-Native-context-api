@@ -7,6 +7,7 @@ const Tab = createNativeStackNavigator();
 import Principal from './telas/Principal';
 import Login from './telas/Login';
 import Configuracao from './telas/Configuracao';
+import Resumo from './telas/Resumo';
 
 export default function Rotas() {
   return (
@@ -15,6 +16,7 @@ export default function Rotas() {
         <Tab.Screen name="Login" component={Login} options={{ headerShown: false }}/>
         <Tab.Screen name="Principal" component={Principal} options={{ headerShown: false }}/>
         <Tab.Screen name="Configurações" component={Configuracao} options={{ headerTitleAlign: 'center' }}/>
+        <Tab.Screen name="Resumo" component={Resumo} options={{ headerTitleAlign: 'center' }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
