@@ -45,6 +45,7 @@ export default function Login({ navigation }) {
           autoCapitalize="none"
           value={senha}
           onChangeText={setSenha}
+          secureTextEntry={true}
         />
       </View>
 
