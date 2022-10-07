@@ -68,5 +68,18 @@ export const estilos = (tema) => {
     color: tema.texto,
     fontSize: 30,
   },
+  botao: {
+    margin: 16,
+    marginBottom: 32,
+    paddingVertical: 16,
+    borderRadius: 10,
+    backgroundColor: tema.botao,
+  },
+  botaoTexto: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: tema.preto,
+      textAlign: 'center',
+  },
 });
 }
