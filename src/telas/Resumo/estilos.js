@@ -6,7 +6,7 @@ export const estilos = (tema) => {
   container: {
     flex: 1,
     backgroundColor: tema.fundo,
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
   tituloArea: {
