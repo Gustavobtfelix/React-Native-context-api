@@ -1,36 +1,34 @@
-import { createContext, useState, useEffect } from 'react';
-import { pegarProdutos, salvarProduto } from '../servicos/requisicoes/produtos';
+import { createContext, useState, useEffect } from "react";
+import { pegarProdutos, salvarProduto, removerProduto } from "../servicos/requisicoes/produtos";
 
 export const ProdutosContext = createContext({});
 
-export function ProdutosProvider ( {children} ) { // tudo que estiver dentro da variavel GoblalContext, vai ter acesso as informacoes que estao no InfoProvider
+export function ProdutosProvider({ children }) {
     const [quantidade, setQuantidade] = useState(0);
+    const [ultimosVistos, setUltimosVistos] = useState([]);
     const [carrinho, setCarrinho] = useState([]);
-    const [ultimosVistos, setultimosVistos] = useState([]);
     const [precoTotal, setPrecoTotal] = useState(0);
 
     useEffect( async () => {
         const resultado = await pegarProdutos();
-        setCarrinho(resultado);
-        setQuantidade(resultado.length);
-      }, [])
+        if(resultado.length > 0){
+            setCarrinho(resultado);
+            setQuantidade(resultado.length);
+        }
+    },[])
 
     async function viuProduto(produto) {
-        setQuantidade(quantidade+1);
+        const resultado = await salvarProduto(produto);
+        const novoItemCarinho = [...carrinho, resultado];
+        setCarrinho(novoItemCarinho);
+        
+        let novoUltimosVistos = new Set(ultimosVistos);
+        novoUltimosVistos.add(produto);
+        setUltimosVistos([...novoUltimosVistos]);
+
+        setQuantidade(quantidade + 1);
         let novoPrecoTotal = precoTotal + produto.preco;
         setPrecoTotal(novoPrecoTotal);
-        const produtoSalvo = await salvarProduto(produto)
-
-
-        let novoCarrinho = carrinho
-        novoCarrinho.push(produtoSalvo);
-        setCarrinho(novoCarrinho);
-
-        let novoUltimosVistos = new Set(ultimosVistos)
-        novoUltimosVistos.add(produto); // dentro do set, nao pode ter valores repetidos
-       setultimosVistos([...novoUltimosVistos])
-    
-        
     }
 
     async function finalizarCompra() {
@@ -49,19 +47,18 @@ export function ProdutosProvider ( {children} ) { // tudo que estiver dentro da 
         }
     }
 
-
-
     return (
         <ProdutosContext.Provider
-        value={{
-            quantidade,
-            precoTotal,
-            carrinho,
-            ultimosVistos,
-            viuProduto,
-            finalizarCompra                    
-            }}> 
+            value={{
+                quantidade,
+                ultimosVistos,
+                precoTotal,
+                carrinho,
+                viuProduto,
+                finalizarCompra,
+            }}
+        >
             {children}
         </ProdutosContext.Provider>
-    )
+    );
 }

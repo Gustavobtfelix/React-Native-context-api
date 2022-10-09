@@ -1,9 +1,9 @@
-import Rotas from "./src/rotas";
-import { TemaProvider } from "./src/contexts/TemaContext";
 import { AutenticacaoProvider } from "./src/contexts/AutenticacaoContext";
 import { ProdutosProvider } from "./src/contexts/ProdutosContext";
+import { TemaProvider } from "./src/contexts/TemaContext";
+import Rotas from "./src/rotas";
 
-export default function App() { // o que estiver dentro do InfoProvider, vai ter acesso as informacoes que estao no InfoProvider
+export default function App() {
   return (
     <TemaProvider>
       <AutenticacaoProvider>

@@ -1,38 +1,38 @@
-import { createContext, useState } from 'react';
-import { escuro, claro } from '../estilosGlobais';
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useEffect } from 'react'
+import { createContext, useState, useEffect } from "react";
+import { escuro, claro } from "../estilosGlobais";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const TemaContext = createContext({})
+export const TemaContext = createContext({});
 
-export function TemaProvider( {children} ) {    
-  const [temaAtual, setTemaAtual] = useState('escuro')
+export function TemaProvider({ children }) {
+    const [tema, setTema] = useState("escuro");
 
-  const temas = {
-    'escuro': escuro,
-    'claro': claro
-  }
-
-  useEffect( async () => {
-    const temaSalvo = await AsyncStorage.getItem('@tema');
-    if(temaSalvo) {
-      setTemaAtual(temaSalvo)
+    const temas = {
+        'escuro': escuro,
+        'claro': claro
     }
-  },[])
 
-  async function salvarTemaNoDispositivo(tema){
-    await AsyncStorage.setItem('@tema', tema)
-    setTemaAtual(tema)
-  }
+    useEffect( async () => {
+        const tema = await AsyncStorage.getItem("@tema");
+        if(tema){
+            setTema(tema);
+        }
+    },[])
 
-  return (
-    <TemaContext.Provider value={{
-      temaAtual,
-      setTemaAtual,
-      temaEscolhido: temas[temaAtual],  // variavel que procura valores na biblioteca temas com o valor do temaAtual
-      salvarTemaNoDispositivo
-    }}>
-      {children}
-    </TemaContext.Provider>
-  )
+    async function setTemaAtual(tema){
+        await AsyncStorage.setItem("@tema", tema);
+        setTema(tema);
+    }
+
+    return (
+        <TemaContext.Provider
+            value={{
+                tema,
+                temas: temas[tema],
+                setTemaAtual,
+            }}
+        >
+            {children}
+        </TemaContext.Provider>
+    );
 }

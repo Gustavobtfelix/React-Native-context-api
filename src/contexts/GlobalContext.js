@@ -1,19 +1,11 @@
-import { createContext, useState } from 'react';
+import { createContext } from "react";
 
-export const GlobalContext = createContext();
+export const GlobalContext = createContext({});
 
-export function InfoProvider ( {children} ) { // tudo que estiver dentro da variavel GoblalContext, vai ter acesso as informacoes que estao no InfoProvider
-    const valor = 200;
-    const [nome, setNome] = useState("andre")
-
+export function InfoProvider({ children }) {
     return (
-        <GlobalContext.Provider
-        value={{
-            valor,
-            nome,
-            setNome         
-            }}> 
+        <GlobalContext.Provider value={{ valor: 150 }}>
             {children}
         </GlobalContext.Provider>
-    )
+    );
 }

@@ -1,33 +1,31 @@
-import { createContext, useState } from 'react';
+import { createContext, useState } from "react";
 
-export const AutenticacaoContext = createContext();
+export const AutenticacaoContext = createContext({});
 
-export function AutenticacaoProvider ( {children} ) { // tudo que estiver dentro da variavel GoblalContext, vai ter acesso as informacoes que estao no InfoProvider
-    const [usuario, setUsuario] = useState({})
+export function AutenticacaoProvider({ children }) {
+    const [usuario, setUsuario] = useState(null);
 
-    function logar(email, senha) {
-        if(email === 'usuario@email.com' && senha === 'senha'){
-            setUsuario({
-                nome: 'Usuario',
-                email: email,
-                endereco: 'Av. Usuario',
-                telefone: '(11) 10101-0101',
-
-            })
-            return 'ok'
-        }
-        else{
-            return 'Email ou senha incorretos';
-        }
+    async function login(email, senha){
+      if(email === 'usuario@email.com' && senha === '12345'){
+          setUsuario({
+              nome: 'Usuario',
+              email: email,
+              telefone: '+55 (11) 99999-9999',
+              endereco: 'Rua Usuario',
+          });
+          return 'ok';
+      }
+      return 'Email ou senha incorretos';
     }
 
     return (
         <AutenticacaoContext.Provider
-        value={{
-            usuario,
-            logar        
-            }}> 
+            value={{
+                usuario,
+                login,
+            }}
+        >
             {children}
         </AutenticacaoContext.Provider>
-    )
+    );
 }

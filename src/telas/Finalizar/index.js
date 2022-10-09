@@ -13,18 +13,14 @@ export default function Finalizar({ navigation }) {
   } = useContext(ProdutosContext);
 
   const {
-    temaEscolhido
+    temas,
   } = useContext(TemaContext);
-
-  
-
-  //const { temaEscolhido } = useContext(TemaContext);
 
   const {
     usuario
   } = useContext(AutenticacaoContext);
 
-  const estilo = estilos(temaEscolhido);
+  const estilo = estilos(temas);
 
   async function finalizar() {
     const resultado = await finalizarCompra();
@@ -55,3 +51,4 @@ export default function Finalizar({ navigation }) {
     </View>
   );
 }
+
