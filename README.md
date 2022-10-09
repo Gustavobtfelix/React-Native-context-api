@@ -68,6 +68,14 @@ $ json-server --watch --host 192.168.15.43 db.json
 
 Espero que você utilize ao máximo deste projeto para se aprimorar! E se quiser dar um salve, estou lá no LinkedIn [André Oliveira Cunha](https://www.linkedin.com/in/andr%C3%A9-oliveira-cunha-b26b3a156/). :wave: 
 
+📚 Amostra final do projeto
+
+
+
+https://user-images.githubusercontent.com/90421959/194772762-f2690d60-1a50-4efe-bee7-635e10c7f741.mp4
+
+
+
 [nodejs]: https://nodejs.org/
 [expo]: https://docs.expo.dev/
 [rn]: https://facebook.github.io/react-native/
