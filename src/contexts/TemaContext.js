@@ -1,24 +1,38 @@
 import { createContext, useState } from 'react';
 import { escuro, claro } from '../estilosGlobais';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useEffect } from 'react'
 
-export const TemaContext = createContext();
+export const TemaContext = createContext({})
 
-const temas = {
+export function TemaProvider( {children} ) {    
+  const [temaAtual, setTemaAtual] = useState('escuro')
+
+  const temas = {
     'escuro': escuro,
-    'claro': claro,
-}
+    'claro': claro
+  }
 
-export function TemaProvider ( {children} ) { // tudo que estiver dentro da variavel GoblalContext, vai ter acesso as informacoes que estao no InfoProvider
-    const [temaAtual, setTemaAtual] = useState("escuro")
+  useEffect( async () => {
+    const temaSalvo = await AsyncStorage.getItem('@tema');
+    if(temaSalvo) {
+      setTemaAtual(temaSalvo)
+    }
+  },[])
 
-    return (
-        <TemaContext.Provider
-        value={{
-            temaAtual,
-            setTemaAtual,
-            temaEscolhido: temas[temaAtual]    // variavel que procura valores na biblioteca temas com o valor do temaAtual
-            }}> 
-            {children}
-        </TemaContext.Provider>
-    )
+  async function salvarTemaNoDispositivo(tema){
+    await AsyncStorage.setItem('@tema', tema)
+    setTemaAtual(tema)
+  }
+
+  return (
+    <TemaContext.Provider value={{
+      temaAtual,
+      setTemaAtual,
+      temaEscolhido: temas[temaAtual],  // variavel que procura valores na biblioteca temas com o valor do temaAtual
+      salvarTemaNoDispositivo
+    }}>
+      {children}
+    </TemaContext.Provider>
+  )
 }
