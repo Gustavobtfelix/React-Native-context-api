@@ -1,5 +1,10 @@
 {
-    "produtos": [
-        
-    ]
+  "produtos": [
+    {
+      "imagem": 3,
+      "texto": "Tenis bacana",
+      "preco": 100,
+      "id": 1
+    }
+  ]
 }
