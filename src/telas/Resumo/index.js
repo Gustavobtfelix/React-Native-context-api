@@ -44,7 +44,9 @@ export default function Resumo({navigation}) {
         showsVerticalScrollIndicator={false}
       />
 
-      <TouchableOpacity style={estilo.botao}>
+      <TouchableOpacity style={estilo.botao}
+        onPress={() => navigation.navigate('Finalizar')}
+      >
         <Text strle={estilo.botaoTexto}>Finalizar Compra</Text>
       </TouchableOpacity>
 

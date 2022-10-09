@@ -20,7 +20,9 @@ export default function Finalizar({navigation}) {
   return (
     <View style={estilo.container}>
       <StatusBar />
-      <TouchableOpacity style={estilo.botao}>
+      <TouchableOpacity style={estilo.botao}
+        onPress={() => navigation.navigate('Principal')}
+      >
         <Text strle={estilo.botaoTexto}>Finalizar Compra</Text>
       </TouchableOpacity>
 
